@@ -42,4 +42,16 @@ false
 ### Tuple
    중괄호 ( { } ) 로 표현되는 데이터.   {Element1, Element2, ..., ElementN}.   
    하나의 자료를 이루는 **구조체** 같은 것.  
-   ***{point, {X, Y}}*** 이렇게 표현하는 것이 데이터의 이름을 부여한 방식으로 가독성이 더 좋다.
+   **{point, {X, Y}}** 이렇게 데이터의 이름을 부여한 방식이 가독성이 더 좋다.
+   
+### List
+   \[ \] 로 표현되는 데이터. \[Element1, Element2, ..., ElementN\].  
+   ** 배열 ** 이다.
+
+### Record
+   이름이 있는 Tuple 이다. ( 실제로 내부적으로는 Tuple 이다. )
+   따라서, 구조체를 대표하는 이름과 각 Field 의 이름이 있다.
+   ```erlang
+    rd(person, {name=undefined, age=0}).   %% undefined, 0 은 각각 default 값
+                                           %% rd 는 record 를 정의하는 함수
+   ```
