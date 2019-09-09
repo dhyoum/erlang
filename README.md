@@ -84,17 +84,22 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
   compiler 를 완전히 무시함.
   
 #### Type expression
+형식
+```erlang
+@type newType() = TypeExpression
+```
+예)
 ```erlang
 @type onOff() = on | off.
 @type person() = {person, name(), age()}.
 ```
 
 #### Function expression
+형식
 ```erlang
- @spec func(Arg1, ... Argn) -> Val
+ @spec funcName(Arg1, ... Argn) -> Val
 ```
-> @spec : Erlang 형식의 type notiation. 
-
+예)
 ```erlang
 -module(math).
 -export([fac/1]).
@@ -104,4 +109,9 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
 fac(0) -> 1;
 fac(N) -> N * fac(N-1).
 ```
-
+좀더 복잡한 예)
+```erlang
+@spec file:open(string(), [mode()]) -> {ok, file_handle()} | error().
+@type error() = {error, string()}.
+@type mode() = read | write | compressed | raw | binary | ...
+```
