@@ -7,7 +7,7 @@ apt-get install erlang
 ### Number
 ```erlnag
 1> A = 1.
-2> "CAT".     %% 문자열은 List 의 특수한 형태일이다.
+2> "CAT".     %% 문자열은 List 의 특수한 형태.
 "CAT"
 3> $C.
 67
@@ -57,6 +57,11 @@ false
    ```
    
 ### Binary
+```erlang
+A = <<5, 8>>.   %% binary 로 0x0508 을 의미한다.
+B = <<"cat" >>. %% <<99,97,116>> 과 동일
+```
+
 
 ### Bit Syntax
 
@@ -64,3 +69,39 @@ false
 
 ### Pattern Matching
    동일한 모양(Pattern)을 대응(Matching) 시켜서 원하는 데이터 또는 Field 를 찾는 방법
+
+
+# Function
+
+
+
+
+
+
+
+## 문서화
+  문서화를 위해서 만들어 내는 것임.
+  compiler 를 완전히 무시함.
+  
+#### Type expression
+```erlang
+@type onOff() = on | off.
+@type person() = {person, name(), age()}.
+```
+
+#### Function expression
+```erlang
+ @spec func(Arg1, ... Argn) -> Val
+```
+> @spec : Erlang 형식의 type notiation. 
+
+```erlang
+-module(math).
+-export([fac/1]).
+
+%% @spec fac((int)) -> int().
+
+fac(0) -> 1;
+fac(N) -> N * fac(N-1).
+```
+
