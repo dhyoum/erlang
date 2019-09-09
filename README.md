@@ -25,7 +25,7 @@ apt-get install erlang
   - 소문자로 시작하는 문자 
   - ' ' 작은 따옴표로 묶여 있는 모든 것
 ### Term
-  erlang 의 데이터 구조  
+  erlang 의 데이터 들의 통칭하는 단어로 사용하는 것 같다.
   Term 들 간의 비교
 ```erlang
 (test@KR-00000515)8> 5 =:= 5.	%% 동일한가?
@@ -55,3 +55,12 @@ false
     rd(person, {name=undefined, age=0}).   %% undefined, 0 은 각각 default 값
                                            %% rd 는 record 를 정의하는 함수
    ```
+   
+### Binary
+
+### Bit Syntax
+
+### Maps
+
+### Pattern Matching
+   동일한 모양(Pattern)을 대응(Matching) 시켜서 원하는 데이터 또는 Field 를 찾는 방법
