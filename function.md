@@ -39,6 +39,7 @@ tail_len([_|T], Acc) -> tail_len(T,Acc+1).
 one() -> 1.
 two() -> 2.
 add(X,Y) -> X() + Y().
+```
 
 이를 Erlang Shell 에서 어떻게 사용할 것인가?
 ```erlang
