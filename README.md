@@ -213,12 +213,21 @@ run() ->
 -export([Function1/Arity, Function2/Arity, ..., FunctionN/Arity]).  %% 외부에 제공하는 기능
 ```
 예)
+filename : myfunc.erl
 ```erlang
 -module(myfunc).
 -export([add/2]).
 add(A,B) ->
   A + B.
 ```
+filename : mydata.hrl
+```erlang
+-include("other.hrl").      %% 절대 패스 or 상대 패스
+-include_lib("other2.hrl"). %% 상대패스만 검색
+-define(DEFAULT, noname).
+-record(person, {name=?DEFAULT, age}).
+```
+
   다른 모듈에서 사용할 때.
 ```erlang
 -import(Module, [Function1/Arity, ..., FunctionN/Arity]).
