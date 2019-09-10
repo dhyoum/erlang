@@ -67,8 +67,8 @@ ets_tests(Config) ->
 ```
 여기서 **Config** 에 대해서 알아야 한다.  
 
-**Config** 
-   - TEST 과정에서 필요한 데이터를 저장, 관리하는 proplist 이다.  
-   - 가급적이면, 직접 proplist 를 handling 하지 말고, ?config(Key, List) 를 이용하자.
+Config
+     - TEST 과정에서 필요한 데이터를 저장, 관리하는 proplist 이다.  
+     - 가급적이면, 직접 proplist 를 handling 하지 말고, ?config(Key, List) 를 이용하자.
 
 * ct_run 을 수행할 때, spec 파일을 별도로 만들어서 각각에 TEST 에 대한 로그 및 상세 설정도 가능하다.
