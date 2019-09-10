@@ -2,8 +2,27 @@
 ```
 apt-get install erlang
 ```
-### online compile & exectue
-    [link](https://www.tutorialspoint.com/compile_erlang_online.php)
+
+* compile & execute
+```
+  erlc helloworld.erl
+  erl -noshell -s helloworld start -s init stop
+```
+
+-s helloworld start  
+  hellworld:start() 함수를 실행한다.
+-s init stop  
+  apply(hello, start, []) 가 완료되면, init:stop() 함수를 실행한다.
+
+* Escript 로 실행하기
+```
+  #!/usr/bin/env escript
+  main(_) ->
+      io:format("hello").
+```
+
+### online test
+[link](https://www.tutorialspoint.com/compile_erlang_online.php)
 
 ## 자료형
 ### Number
