@@ -75,9 +75,45 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
 
 
 
+# Module
+  functions 또는 attributes (구조체) 들을 별도의 파일로 관리
 
-
-
+```erlang
+-module(Name).    %% 첫줄은 항상 module 로 시작. Name 은 atom
+-export([Function1/Arity, Function2/Arity, ..., FunctionN/Arity]).  %% 외부에 제공하는 기능
+```
+예)
+```erlang
+-module(myfunc).
+-export([add/2]).
+add(A,B) ->
+  A + B.
+```
+  다른 모듈에서 사용할 때.
+```erlang
+-import(Module, [Function1/Arity, ..., FunctionN/Arity]).
+```
+  shell 에서 compile
+```erlang
+2> c(myfunc).      %% 또는 c(myfunc, [debug_info, export_all]).
+{ok,myfunc}
+3> myfunc:add(7,2).
+9
+(test@KR-00000515)29> myfunc:module_info().
+[{module,myfunc},
+ {exports,[{add,2},{module_info,0},{module_info,1}]},
+ {attributes,[{vsn,[182319581640350949953262776855260433542]}]},
+ {compile,[{version,"7.2.1"},
+           {options,[debug_info,
+                     {i,"C:/Users/edooyou/eclipse-workspace/test/include"},
+                     nowarn_export_all,nowarn_export_vars,nowarn_shadow_vars,
+                     warn_unused_function,warn_deprecated_function,
+                     nowarn_obsolete_guard,nowarn_unused_import,
+                     warn_unused_vars,warn_unused_record]},
+           {source,"c:/Users/edooyou/eclipse-workspace/test/src/myfunc.erl"}]},
+ {md5,<<137,41,121,99,101,173,60,171,183,223,36,20,33,98,
+        12,134>>}]
+```
 
 ## 문서화
   문서화를 위해서 만들어 내는 것임.
