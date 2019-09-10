@@ -71,8 +71,7 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
 
   key - value 로 구성된 데이터 구조.  
   python 에서 dictionary 와 동등하다.  
-  단, add / delete 라는 것은 없다. 당연하다, Erlang 이니깐.  
-  대신 merge / remove 를 통해서, 새로운 Map 을 만들어 낼 수 는 있다.
+  update / remove 를 이용하여, 새로운 Map 을 반환한다.
   
 ```erlang
 -module(map).
@@ -96,7 +95,26 @@ run() ->
     end,
     ok.
 ```
-  [property list](http://erlang.org/doc/man/proplists.html) 와의 변환
+
+  * Update
+```erlang  
+   Map = #{"a" => 1}.
+   #{"a" => 1}
+   > maps:update("a", 42, Map).
+   #{"a" => 42}
+```
+
+  * Remove
+```erlang
+  > Map = #{"a" => 1}.
+  #{"a" => 1}
+  > maps:remove("a",Map).
+  #{}
+  > maps:remove("b",Map).
+  #{"a" => 1}
+```
+
+  * [property list](http://erlang.org/doc/man/proplists.html) 와의 변환
   ```erlang
     List = [{"a",ignored},{1337,"value two"},{42,value_three},{"a",1}],
     maps:from_list(List).
@@ -107,7 +125,6 @@ run() ->
     maps:to_list(Map).
     [{42,value_three},{1337,"value two"},{"a",1}]
   ```
-
 
 ## Module
   functions 또는 attributes (구조체) 들을 별도의 파일로 관리
