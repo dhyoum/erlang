@@ -8,11 +8,10 @@ apt-get install erlang
   erlc helloworld.erl
   erl -noshell -s helloworld start -s init stop
 ```
-
 -s helloworld start  
-  hellworld:start() 함수를 실행한다.  
+    hellworld:start() 함수를 실행한다.  
 -s init stop  
-  apply(hello, start, []) 가 완료되면, init:stop() 함수를 실행한다.
+    apply(hello, start, []) 가 완료되면, init:stop() 함수를 실행한다.
 
 * Escript 로 실행하기
 ```
