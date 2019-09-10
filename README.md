@@ -222,8 +222,8 @@ add(A,B) ->
 ```
 filename : mydata.hrl
 ```erlang
--include("other.hrl").      %% 절대 패스 or 상대 패스
--include_lib("other2.hrl"). %% 상대패스만 검색
+-include("other.hrl").          %% 절대패스 or 상대패스
+-include_lib("lib/other2.hrl"). %% 현재 lib 의 현재버전을 확인하여, 그 아래의 other2.hrl 을 가지고 온다. 
 -define(DEFAULT, noname).
 -record(person, {name=?DEFAULT, age}).
 ```
