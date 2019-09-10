@@ -53,10 +53,33 @@ false
 ### Record
    이름이 있는 Tuple 이다. ( 실제로 내부적으로는 Tuple 이다. )
    따라서, 구조체를 대표하는 이름과 각 Field 의 이름이 있다.
+   
+  * Defining a Record
    ```erlang
-    rd(person, {name=undefined, age=0}).   %% undefined, 0 은 각각 default 값
-                                           %% rd 는 record 를 정의하는 함수
-   ```
+    rd(person, {name = "", phone = [], address}).
+   ```   
+  * Creating a Record
+  ```erlang
+	#person{phone=[0,8,2,3,4,3,1,2], name="Robert"}.
+  ```
+
+  * Accessing a Record Field
+  ```erlang  
+	P = #person{name = "Joe", phone = [0,8,2,3,4,3,1,2]}.
+	P#person.name.
+  ```    
+
+  * Updating a Record
+  ```erlang
+	P1 = #person{name="Joe", phone=[1,2,3], address="A street"}.
+	P2 = P1#person{name="Robert"}.
+  ```
+
+  * Pattern Matching
+  ```erlang
+	P3 = #person{name="Joe", phone=[0,0,7], address="A street"}.
+    #person{name = Name} = P3, Name.   
+  ```
    
 ### Binary
 ```erlang
