@@ -50,6 +50,7 @@ in function  hhfuns:add/2
 3> hhfuns:add(1,2).
 ** exception error: bad function 1
 in function  hhfuns:add/2
+
 %% 각각 function 임을 알려줘야, VM 이 변수에 Binding  할 수 있다.
 4> hhfuns:add(fun hhfuns:one/0, fun hhfuns:two/0).  
 3
@@ -75,7 +76,7 @@ map(F, [H|T]) -> [F(H)|map(F,T)].
 ```
 예)
 ```erlang
-lists:map(fun(A)->2*A end, lists:seq(1,10)).
+lists:map(fun(A) -> 2*A end, lists:seq(1,10)).
 [2,4,6,8,10,12,14,16,18,20]
 ```
 
@@ -107,5 +108,5 @@ fold(F, Start, [H|T]) -> fold(F, F(H,Start), T).
 예)
 ```erlang
 lists:foldl(fun(A,B) -> A + B end, 0, lists:seq(1, 10)).
-55.
+55
 ```
