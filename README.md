@@ -71,7 +71,11 @@ false
 ### Record
    이름이 있는 Tuple 이다. ( 실제로 내부적으로는 Tuple 이다. )
    따라서, 구조체를 대표하는 이름과 각 Field 의 이름이 있다.
-   
+
+* Syntax
+```erlang
+#recordname {fieldName1 = value1, fieldName2 = value2 .. fieldNameN = valueN}
+```
   * Defining a Record
    ```erlang
     rd(person, {name = "", phone = [], address}).
@@ -98,6 +102,40 @@ false
 	P3 = #person{name="Joe", phone=[0,0,7], address="A street"}.
     #person{name = Name} = P3, Name.   
   ```
+
+* 별도의 파일로 기록하고, 이를 Erlang Shell 에서 읽어 드리는 방법.  
+
+    filename : test.hdr
+```erlang
+-record(person, {name=undefined, age=0}).
+-record(company, {name=undefined, year=0}).
+
+1> rr("test.hdr").
+[company,person]
+2> rl().
+```  
+
+* Nested Records
+```erlang
+-record(nrec0, {name = "nested0"}).
+-record(nrec1, {name = "nested1", nrec0=#nrec0{}}).
+-record(nrec2, {name = "nested2", nrec1=#nrec1{}}).
+
+N2 = #nrec2{},
+```
+
+* Access 하는 방법
+
+```erlang
+"nested0" = N2#nrec2.nrec1#nrec1.nrec0#nrec0.name,
+N0n = N2#nrec2.nrec1#nrec1.nrec0#nrec0{name = "nested0a"},
+```
+
+* 아래와 같이, 각 filed 에 대해서 type 을 명세할 수는 있지만, 실제로 값을 제한하거나 하는 것은 아니다.
+
+```erlang
+-record(person, {name :: 'undefined' | 'a' | 'b', age :: 0..127}).
+```
    
 ### Binary
 ```erlang
