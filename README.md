@@ -70,8 +70,8 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
 ### Maps
 
   key - value 로 구성된 데이터 구조.  
-  예)
-  ```erlang
+  
+```erlang
 -module(map).
 -compile([export_all]).
 
@@ -81,15 +81,8 @@ write(String, Value) ->
 run() ->
     M1 = #{name => "Joe Doe", age => 25},
     write("Map", M1),
-
-
     write("Name", maps:get(name, M1)),
-
-
-
     write("Degree", maps:get(degree, M1, defaultdegree)),
-
-
 
     Keyname = randomkey,
     case maps:find(Keyname, M1) of
@@ -99,8 +92,7 @@ run() ->
             write("No value found for key", Keyname)
     end,
     ok.
-  ```
-
+```
 
 ## Module
   functions 또는 attributes (구조체) 들을 별도의 파일로 관리
