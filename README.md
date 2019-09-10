@@ -1,9 +1,9 @@
-# Installation
+## Installation
 ```
 apt-get install erlang
 ```
 
-# 자료형
+## 자료형
 ### Number
 ```erlnag
 1> A = 1.
@@ -67,15 +67,12 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
 
 ### Maps
 
-### Pattern Matching
-   동일한 모양(Pattern)을 대응(Matching) 시켜서 원하는 데이터 또는 Field 를 찾는 방법
+## Function
+
+### ...
 
 
-# Function
-
-
-
-# Module
+## Module
   functions 또는 attributes (구조체) 들을 별도의 파일로 관리
 
 ```erlang
