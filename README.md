@@ -2,6 +2,8 @@
 ```
 apt-get install erlang
 ```
+### online compile & exectue
+    [link](https://www.tutorialspoint.com/compile_erlang_online.php)
 
 ## 자료형
 ### Number
@@ -46,7 +48,7 @@ false
    
 ### List
    \[ \] 로 표현되는 데이터. \[Element1, Element2, ..., ElementN\].  
-   ** 배열 ** 이다.
+   **배열** 이다.
 
 ### Record
    이름이 있는 Tuple 이다. ( 실제로 내부적으로는 Tuple 이다. )
@@ -67,9 +69,37 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
 
 ### Maps
 
-## Function
+  key - value 로 구성된 데이터 구조.  
+  예)
+  ```erlang
+-module(map).
+-compile([export_all]).
 
-### ...
+write(String, Value) ->
+    io:format("~p = ~p~n", [String, Value]).
+
+run() ->
+    M1 = #{name => "Joe Doe", age => 25},
+    write("Map", M1),
+
+
+    write("Name", maps:get(name, M1)),
+
+
+
+    write("Degree", maps:get(degree, M1, defaultdegree)),
+
+
+
+    Keyname = randomkey,
+    case maps:find(Keyname, M1) of
+        {ok, Value} ->
+            write("Found value", Value);
+        error ->
+            write("No value found for key", Keyname)
+    end,
+    ok.
+  ```
 
 
 ## Module
