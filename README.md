@@ -10,7 +10,7 @@ apt-get install erlang
 ```
 
 -s helloworld start  
-  hellworld:start() 함수를 실행한다.
+  hellworld:start() 함수를 실행한다.  
 -s init stop  
   apply(hello, start, []) 가 완료되면, init:stop() 함수를 실행한다.
 
