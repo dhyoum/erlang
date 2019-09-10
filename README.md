@@ -76,7 +76,7 @@ B = <<"cat" >>. %% <<99,97,116>> 과 동일
   functions 또는 attributes (구조체) 들을 별도의 파일로 관리
 
 ```erlang
--module(Name).    %% 첫줄은 항상 module 로 시작. Name 은 atom
+-module(Name).                                                      %% 첫줄은 항상 module 로 시작. Name 과 파일명은 일치
 -export([Function1/Arity, Function2/Arity, ..., FunctionN/Arity]).  %% 외부에 제공하는 기능
 ```
 예)
