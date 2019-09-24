@@ -46,7 +46,7 @@ loop() ->
             loop()
     end.
 ```
-이걸 그냥 수행하면, 그냥 receive 상태에서 아무것도 할 수 가 없다.
+이걸 그냥 수행하면, 그냥 receive 상태에서 아무것도 할 수 가 없다.   
 spawn 으로 수행해서, 메시지를 송수신 할 수 있는 Actor 로 만들고, 메시지를 전달해보자.
 ```erlang
 4> Pid = spawn(fun sum_server:loop/0).
