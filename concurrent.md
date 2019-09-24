@@ -26,7 +26,7 @@ Pid ! Message
 Pid1 ! Pid2 ! Pid3 ! ... ! M
 ```
 
-### Recieve
+### Receve
 
 Erlang 에서는 각 프로세스는 연결된 mailbox 를 하나씩 가지고, 프로세스로 메시지를 전달하면, mailbox 로 유입되고, 그 mailbox 는 recieve 구문을 통해서만 검사가 이뤄진다.  
 ```erlang
