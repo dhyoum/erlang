@@ -29,7 +29,8 @@ receive
 end
 ```
 어떤 메시지가 프로세스에 도착하면, 시스템은 그 메시지를 Pattern1 부터 차례대로 matching 시킨다.  
-어떤 서버가 기능을 제공하려면, 일반적으로 무한 loop 를 running 해야하고, 따라서 아래와 같은 방식으로 구현이 될 것이다.
+어떤 서버가 기능을 제공하려면, 일반적으로 무한 loop 로 running 하면서, 메시지를 기다리고, 각 메시지에 따라서 다양한 동작을 수행한다.
+아래와 같은 방식으로 구현이 될 것이다.
 
 ```erlang
 -module(sum_server).
@@ -54,3 +55,5 @@ spawn 으로 수행해서, 메시지를 송수신 할 수 있는 Actor 로 만�
 Recieved {1,2}
 {1,2}
 ```
+
+Erlang 의 Pattern Matching 을 이용하여, recieve 구문을 각 Message 별로 구분해서 처리하도록 하면, 더욱 근사한 Client-Server 를 구현할 수 있다.
