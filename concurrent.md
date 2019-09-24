@@ -1,6 +1,8 @@
-### 병행성(Concurrent) 프로그래밍
+## 병행성(Concurrent) 프로그래밍
 
 * spwan, send, receive 세가지의 함수로 구현이 된다.
+
+### spawn
 
 ```erlang
 Pid = spawn(Fun)
@@ -13,6 +15,8 @@ Pid 는 프로세스로 메시지를 보낼 때 사용할 수 있다.
 spawn(Mod, FuncName, Args)
 ```
 
+### Send
+
 ```erlang
 Pid ! Message
 ```
@@ -21,6 +25,8 @@ Pid ! Message
 ```erlang
 Pid1 ! Pid2 ! Pid3 ! ... ! M
 ```
+
+### Recieve
 
 Erlang 에서는 각 프로세스는 연결된 mailbox 를 하나씩 가지고, 프로세스로 메시지를 전달하면, mailbox 로 유입되고, 그 mailbox 는 recieve 구문을 통해서만 검사가 이뤄진다.  
 ```erlang
@@ -61,6 +67,8 @@ Recieved {1,2}
 {1,2}
 ```
 
+### Client-Server Model
+
 Erlang 의 Pattern Matching 을 이용하여,    
 recieve 구문을 각 Sender 와 Message 별로 구분해서 처리하도록 하면, 더욱 근사한 Client-Server 를 구현할 수 있다.
 ```erlang
@@ -95,7 +103,7 @@ loop() ->
 200
 ```
 
-#### 등록된 프로세스
+### 등록된 프로세스
 
 시스템에 Pid 와 식별자를 등록하여, 송수신을 편하게 이용하는 방법.  
 
@@ -105,3 +113,37 @@ unregister(Atom)
 whereis(Atom)
 registered()
 ```
+
+
+### 프로세스 연결하기
+
+프로세스간에 오류의 확산 경로를 정의하는 것. 즉, 한쪽 프로세스에서 오류(죽거나 Exception 이 발생한 경우)가 발생하면, **link** 되어 있는 모든 프로세스로 오류를 전달한다.  
+**link** 는 기본적으로 bi-directional 이다.  
+
+* 내가 생성한 프로세스가 멎어도 몰라.
+```erlang
+Pid = spawn(func() -> .. end)
+```
+* 내가 생성한 프로세스가 멎어도 나도 죽어. ( link 만 하고 아무것도 하지 않은 상태는 그냥 죽는 것 )
+```erlang
+Pid = spawn_link(func() -> .. end)
+```
+* 내가 생성한 프로세스가 멎으면 내가 어떻게든 해볼께.
+```erlang
+process_flag(trap_exit, true),  %% 시스템 프로세스(다른 프로세스의 종료시그널을 trap 할 수 있는 프로세스) 로 전환
+Pid = spawn(func() -> .. end),
+...
+loop(...).
+loop(State) ->
+    received
+        {'EXIT', SomePid, Reason} ->
+            %% 오류로 뭔가 처리가 필요.!
+            loop(State1);
+        ....
+    end
+```
+
+### OTP 프로그램
+
+* link
+http://erlang.org/doc/design_principles/des_princ.html#otp%20design%20principles
