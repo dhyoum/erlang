@@ -1,10 +1,10 @@
 ## Installation
-```
+```sh
 apt-get install erlang
 ```
 
 * compile & execute
-```
+```sh
   erlc helloworld.erl
   erl -noshell -s helloworld start -s init stop
 ```
@@ -14,7 +14,7 @@ apt-get install erlang
     apply(hello, start, []) 가 완료되면, init:stop() 함수를 실행한다.
 
 * Escript 로 실행하기
-```
+```sh
   #!/usr/bin/env escript
   main(_) ->
       io:format("hello").
@@ -113,10 +113,11 @@ false
 
     filename : test.hdr
 ```erlang
-   -record(person, {name=undefined, age=0}).
-   -record(company, {name=undefined, year=0}).
-
-1> rr("test.hdr").
+-record(person, {name=undefined, age=0}).
+-record(company, {name=undefined, year=0}).
+```
+```sh
+1> rr("test.hdr"). %% rr 명령어를 이용해서, reocord 를 읽어드린다.
 [company,person]
 2> rl().
 ```  
@@ -149,8 +150,10 @@ A = <<5, 8>>.   %% binary 로 0x0508 을 의미한다.
 B = <<"cat" >>. %% <<99,97,116>> 과 동일
 ```
 
-
 ### Bit Syntax
+
+* to be updated
+
 
 ### Maps
 
