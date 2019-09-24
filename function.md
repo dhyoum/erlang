@@ -57,6 +57,50 @@ in function  hhfuns:add/2
 3
 ```
 
+erl 파일내의 hdr 가 존재하는 경우.
+```erlang
+%% FILE : mod.erl
+-module(mod).
+-export([add/2]).
+-export_type([age/0]).
+-include("mystruct.hdr").
+
+-type age() :: integer().
+-spec add(A, B) -> Result when
+    A :: integer,
+    B :: integer,
+    Result :: age().
+
+add(A, B) ->
+    A+B.
+```
+```erlang
+%% FILE : mystruct.hdr
+-record(person, {age=20}).
+```
+```sh
+1> c(mod).
+{ok,mod}
+2> m(mod).
+Module: mod
+MD5: f6efefce6452988e6345f1fc7ad2610a
+Compiled: No compile time info available
+Object file: /home/dhyoum/erlang/mod.beam
+Compiler options:  []
+Exports: 
+         add/2
+         module_info/0
+         module_info/1
+ok
+3> rl().
+ok
+4> rr(mod).   %% 이미 적재된 module 내에 정의되어 있는 record 들을 읽어들인다.
+[person]
+5> rl().
+-record(person,{age = 20}).
+ok
+```
+
 ### Anonymous functions
   작성하는 방식
 ```erlang
