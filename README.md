@@ -70,7 +70,7 @@ false
 ### List
    \[ \] 로 표현되는 데이터.  
    ```erlang
-   [Element1, Element2, ..., ElementN\].
+   [Element1, Element2, ..., ElementN].
    ```
    **배열** 이다.
 
@@ -88,33 +88,33 @@ false
    ```   
   * Creating a Record
   ```erlang
-	#person{phone=[0,8,2,3,4,3,1,2], name="Robert"}.
+     #person{phone=[0,8,2,3,4,3,1,2], name="Robert"}.
   ```
 
   * Accessing a Record Field
   ```erlang  
-	P = #person{name = "Joe", phone = [0,8,2,3,4,3,1,2]}.
-	P#person.name.
+     P = #person{name = "Joe", phone = [0,8,2,3,4,3,1,2]}.
+     P#person.name.
   ```    
 
   * Updating a Record
   ```erlang
-	P1 = #person{name="Joe", phone=[1,2,3], address="A street"}.
-	P2 = P1#person{name="Robert"}.
+     P1 = #person{name="Joe", phone=[1,2,3], address="A street"}.
+     P2 = P1#person{name="Robert"}.
   ```
 
   * Pattern Matching
   ```erlang
-	P3 = #person{name="Joe", phone=[0,0,7], address="A street"}.
-    #person{name = Name} = P3, Name.   
+     P3 = #person{name="Joe", phone=[0,0,7], address="A street"}.
+     #person{name = Name} = P3, Name.   
   ```
 
 * 별도의 파일로 기록하고, 이를 Erlang Shell 에서 읽어 드리는 방법.  
 
     filename : test.hdr
 ```erlang
--record(person, {name=undefined, age=0}).
--record(company, {name=undefined, year=0}).
+   -record(person, {name=undefined, age=0}).
+   -record(company, {name=undefined, year=0}).
 
 1> rr("test.hdr").
 [company,person]
