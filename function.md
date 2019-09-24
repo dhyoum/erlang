@@ -101,6 +101,8 @@ ok
 ok
 ```
 
+* 각 module 의 function 에 대한 도움말을 명령어를 통해서 보는 부분은 없다. online 메뉴를 찾아서 확인 필요
+
 ### Anonymous functions
   작성하는 방식
 ```erlang
