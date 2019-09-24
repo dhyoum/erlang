@@ -29,7 +29,9 @@ receive
 end
 ```
 어떤 메시지가 프로세스에 도착하면, 시스템은 그 메시지를 Pattern1 부터 차례대로 matching 시킨다.  
-어떤 서버가 기능을 제공하려면, 일반적으로 무한 loop 로 running 하면서, 메시지를 기다리고, 각 메시지에 따라서 다양한 동작을 수행한다.
+어떤 서버가 기능을 제공하려면, 일반적으로 무한 loop 로 running 하면서, 메시지를 기다리고 각 메시지에 따라서 다양한 동작을 수행한다.  
+Erlang 에서는 각 프로세스는 연결된 mailbox 를 하나씩 가지고, 프로세스로 메시지를 전달하면, mailbox 로 유입되고, 그 mailbox 는 recieve 구문을 통해서만 검사가 이뤄진다.  
+
 아래와 같은 방식으로 구현이 될 것이다.
 
 ```erlang
@@ -56,4 +58,36 @@ Recieved {1,2}
 {1,2}
 ```
 
-Erlang 의 Pattern Matching 을 이용하여, recieve 구문을 각 Message 별로 구분해서 처리하도록 하면, 더욱 근사한 Client-Server 를 구현할 수 있다.
+Erlang 의 Pattern Matching 을 이용하여,    
+recieve 구문을 각 Sender 와 Message 별로 구분해서 처리하도록 하면, 더욱 근사한 Client-Server 를 구현할 수 있다.
+```erlang
+-module(fun_server).
+-export([loop/0, rpc/2]).
+
+rpc(Pid, Request) ->
+    Pid ! {self(), Request},
+    receive
+        {Pid, Response} ->
+            Response
+    end.
+
+loop() ->
+    receive
+        {From, {func1, A, B}} ->
+            From ! {self(), A+B},
+            loop();
+        {From, {func2, A, B}} ->
+            From ! {self(), A*B},
+            loop()
+    end.
+```
+```erlang
+21> c(fun_server).
+{ok,fun_server}
+22> Pid = spawn(fun fun_server:loop/0).
+<0.20776.0>
+23> fun_server:rpc(Pid, {func1, 10,20}).
+30
+24> fun_server:rpc(Pid, {func2, 10,20}).
+200
+```
