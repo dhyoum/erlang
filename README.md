@@ -263,25 +263,35 @@ filename : mydata.hrl
         12,134>>}]
 ```
 
-## 문서화
-  문서화를 위해서 만들어 내는 것임.
-  compiler 를 완전히 무시함.
-  
+## Type and Function Specifications
+
+특정 유형을 형상하기 위한 표기법으로 아래와 같은 용도가 있다.
+
+* Interface 를 문서화
+* 버그탐지 도구를 위한 정보 제공
+* EDoc 에서의 활용 (?)
+
+EDoc (문서화를 위한 도구)에서 사용하는 방식 : 주석처리(%%)가 있으니깐, compiler 에는 영향을 주지 않는다.
+
 #### Type expression
 형식
 ```erlang
-@type newType() = TypeExpression
+%% @type newType() = TypeExpression
+- type newType() = TypeExpression.
 ```
 예)
 ```erlang
-@type onOff() = on | off.
-@type person() = {person, name(), age()}.
+%% @type onOff() = on | off
+-type onOff() = on | off.
+%% @type person() = {person, name(), age()}
+-type person() = {person, name(), age()}.
 ```
 
 #### Function expression
 형식
 ```erlang
- @spec funcName(Arg1, ... Argn) -> Val
+%% @spec funcName(Arg1, ... Argn) -> Val
+-spec funcName(Arg1, ... Argn) -> Val.
 ```
 예)
 ```erlang
@@ -289,13 +299,14 @@ filename : mydata.hrl
 -export([fac/1]).
 
 %% @spec fac((int)) -> int().
+-spec fac(N) -> N.
 
 fac(0) -> 1;
 fac(N) -> N * fac(N-1).
 ```
 좀더 복잡한 예)
 ```erlang
-@spec file:open(string(), [mode()]) -> {ok, file_handle()} | error().
-@type error() = {error, string()}.
-@type mode() = read | write | compressed | raw | binary | ...
+%% @spec file:open(string(), [mode()]) -> {ok, file_handle()} | error().
+%% @type error() = {error, string()}.
+%% @type mode() = read | write | compressed | raw | binary | ...
 ```
