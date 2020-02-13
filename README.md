@@ -41,9 +41,10 @@ apt-get install erlang
 15
 ```
 ### Atom
-  enum 과 같은 상수.  전역으로 관리되고, 별도의 import 는 필요 없다.
+  enum 과 같은 상수. 전역으로 관리되고, 별도의 import 는 필요 없다.
   - 소문자로 시작하는 문자 
   - ' ' 작은 따옴표로 묶여 있는 모든 것
+  - 개인적으로 Atom 은 Erlang 이 가장 큰 매력이라고 생각한다.
 ### Term
   erlang 의 데이터 들의 통칭하는 단어로 사용하는 것 같다.  
   Term 들 간의 비교
@@ -145,14 +146,31 @@ N0n = N2#nrec2.nrec1#nrec1.nrec0#nrec0{name = "nested0a"},
 ```
    
 ### Binary
+- 정수는 0, 255 범위 내에 있어야 한다.
 ```erlang
 A = <<5, 8>>.   %% binary 로 0x0508 을 의미한다.
-B = <<"cat" >>. %% <<99,97,116>> 과 동일
+B = <<"cat" >>. %% <<99,97,116>> 과 동일 <- erlang 에서 문자열은 ascii 값으로 이뤄진 list 임을 기억하자.
+```
+- useful function
+```erlang
+list_to_binary
+term_to_binary
+binary_to_term
+size
 ```
 
 ### Bit Syntax
-
-* to be updated
+- erlang 의 장점인데, 자세하게 보지 않으면 자꾸 헷깔린다.
+- bit shifting 이 필요 없고, 그냥 필요한 bit 수를 적으면 된다.
+```erlang
+Red = 2.
+Green = 61.
+Blue = 20.
+Mem = <<Red:5, Green:6, Blue:5>>. %% 총 16 bit = 5 + 6 + 5
+<<23,180>>.
+<<R1:5, G2:6, B2:5>> = Mem        %% 추출하는 법
+```
+- 다양한 문법이 있고, 활용한 예제가 있으므로 좀더 찾아보자.
 
 
 ### Maps
