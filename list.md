@@ -1,3 +1,19 @@
+### List
+
+- List 는 erlang 의 시작과 끝이다. 이유는 간단하다, 일단 for 문이 없다. 이런식으로 해야한다.
+
+```erlang
+for(Max, Max, F) -> [F(Max)];
+for(I, Max, F) -> [F(I) | for(I+1, Max, F)].
+
+sum([H|T]) -> H + sum(T);
+sum([]) -> 0.
+
+map(_, []) -> [];
+map(F, [H|T]) -> [F(H)|map(F, T)].
+```
+
+
 ### List Comprehensions
 
 ```erlang
