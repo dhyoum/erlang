@@ -211,7 +211,7 @@ run() ->
     ok.
 ```
 
-  * Update
+* Update
 ```erlang  
    Map = #{"a" => 1}.
    #{"a" => 1}
@@ -219,7 +219,7 @@ run() ->
    #{"a" => 42}
 ```
 
-  * Remove
+* Remove
 ```erlang
   > Map = #{"a" => 1}.
   #{"a" => 1}
@@ -229,7 +229,7 @@ run() ->
   #{"a" => 1}
 ```
 
-  * [property list](http://erlang.org/doc/man/proplists.html) 와의 변환
+* [property list](http://erlang.org/doc/man/proplists.html) 와의 변환
   ```erlang
     List = [{"a",ignored},{1337,"value two"},{42,value_three},{"a",1}],
     maps:from_list(List).
@@ -240,6 +240,39 @@ run() ->
     maps:to_list(Map).
     [{42,value_three},{1337,"value two"},{"a",1}]
   ```
+
+#### size
+Size information should match the [Erlang Efficiency Guide memory information](http://www.erlang.org/doc/efficiency_guide/advanced.html#id68923):
+* Small integer: 1 word
+    * On 32-bit architectures: -134217729 < i < 134217728 (28 bits)
+    * On 64-bit architectures: -576460752303423489 < i < 576460752303423488 (60 bits)
+* Big integer: 3..N words
+* Atom: 1 word
+* Float:
+    * On 32-bit architectures: 4 words
+    * On 64-bit architectures: 3 words
+* Binary: 3..6 + data
+* List: 1 word + 1 word per element + the size of each element
+* Tuple: 2 words + the size of each element
+* Small Map (N =< 32): 5 words + the size of all keys and values
+* Large Map (N > 32): N * [1.6 .. 1.8] + the size of all keys and values
+* Pid:
+    * From local node: 1 word
+    * From remote node: 5 words
+* Port:
+    * From local node: 1 word
+    * From remote node: 5 words
+* Reference:
+    * On 32-bit architectures:
+         * From local node: 5 words
+         * From remote node: 7 words
+    * On 64-bit architectures:
+        * From local node: 4 words
+        * From remote node: 6 words
+* Fun: 9..13 words + size of environment
+* Erlang process: 338 words when spawned (includes a heap of 233 words)
+
+
 
 ## Module
   functions 또는 attributes (구조체) 들을 별도의 파일로 관리
